@@ -30,14 +30,18 @@ function App() {
 
     async function makeCards(count) {
         const arr = [];
-        for (let i = 0; i < count; i++) {
-            const randomPokemon = await Pokemon(Math.floor(Math.random() * 1026));
-            arr.push(<Card key={i} pokemon={randomPokemon.pokemon} sprite={randomPokemon.sprite}
-                 updateList={updateList} />);
-
+        const selectedPokemon = new Set();
+        while (arr.length < count) {
+            const randomIndex = Math.floor(Math.random() * 1024);
+            if (!selectedPokemon.has(randomIndex)) {
+                const randomPokemon = await Pokemon(randomIndex);
+                selectedPokemon.add(randomIndex);
+                arr.push(<Card key={randomIndex} pokemon={randomPokemon.pokemon} sprite={randomPokemon.sprite} updateList={updateList} />);
+            }
         }
         return arr;
     }
+    
 
     async function initializeGame() {
         const cards = await makeCards(number);

@@ -48,11 +48,7 @@ table {
 }
 
 .appContainer {
-	background-size: cover;
-    background-position: center;
     min-height: 100vh; 
-	padding-top: 20px;
-	padding-bottom: 50px;
 }
 
 .cardContainer {
@@ -61,4 +57,5 @@ table {
 	justify-content: center;
 	grid-template-columns: repeat(5, 200px);
 	gap: 20px;
+	padding-bottom: 50px;
 }
