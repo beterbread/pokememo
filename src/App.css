@@ -59,3 +59,21 @@ table {
 	gap: 20px;
 	padding-bottom: 50px;
 }
+
+.pokeball {
+    position: fixed;
+    width: 75px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotatePokeball 2s linear infinite;
+}
+
+@keyframes rotatePokeball {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

@@ -15,6 +15,7 @@ function App() {
     const [number, setNumber] = useState(0);
     const [formCheck, setFormCheck] = useState(true);
     const [replayCheck, setReplayCheck] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const startGame = (num) => {
         if (num >= 1 && num <= 1024) {
@@ -29,19 +30,24 @@ function App() {
     }
 
     async function makeCards(count) {
+        setLoading(true);
         const arr = [];
         const selectedPokemon = new Set();
         while (arr.length < count) {
             const randomIndex = Math.floor(Math.random() * 1024);
             if (!selectedPokemon.has(randomIndex)) {
-                const randomPokemon = await Pokemon(randomIndex);
-                selectedPokemon.add(randomIndex);
-                arr.push(<Card key={randomIndex} pokemon={randomPokemon.pokemon} sprite={randomPokemon.sprite} updateList={updateList} />);
+                try {
+                    const randomPokemon = await Pokemon(randomIndex);
+                    selectedPokemon.add(randomIndex);
+                    arr.push(<Card key={randomIndex} pokemon={randomPokemon.pokemon} sprite={randomPokemon.sprite} updateList={updateList} />);
+                } catch (error) {
+                    console.error("Error fetching Pokémon:", error);
+                }
             }
         }
+        setLoading(false);
         return arr;
     }
-    
 
     async function initializeGame() {
         const cards = await makeCards(number);
@@ -54,8 +60,6 @@ function App() {
         if (currentScore + 1 > bestScore) {
             setBestScore(currentScore + 1); 
         }
-        console.log(currentScore);
-        console.log(number);
         if (currentScore + 1 === number) {
             setFormCheck(true);
             setCurrentCards([]);
@@ -96,11 +100,16 @@ function App() {
         <div className='appContainer' style={{backgroundImage: `url('wallpaper.jpg')`}}>
             {formCheck && <Setup onPlay={startGame} check={replayCheck}></Setup>}
             <div className='cardContainer'>
-            <Scoreboard current={currentScore} best={bestScore} />
-            {currentCards}
+                {loading ? <img className='pokeball' src={'pokeball.png'}></img> : (
+                    <>
+                        {currentCards.length > 0 && <Scoreboard current={currentScore} best={bestScore} />}
+                        {currentCards}
+                    </>
+                )}
             </div>
         </div>
     );
+    
 }
 
 export default App;
