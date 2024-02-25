@@ -5,7 +5,7 @@ export default function Setup({ onPlay, check }) {
     const [numCards, setNumCards] = useState(0); 
 
     return (
-        <div className='setupForm'>
+        <div className='setupForm' style={{backgroundImage: `url('wallpaper.jpg')`}}>
             {check && <h1>You win!</h1>}
             <h1>How many cards?</h1>
             <input

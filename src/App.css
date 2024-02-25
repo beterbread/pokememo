@@ -48,7 +48,6 @@ table {
 }
 
 .appContainer {
-	background-image: url('wallpaper.jpg');
 	background-size: cover;
     background-position: center;
     min-height: 100vh; 

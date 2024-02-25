@@ -89,7 +89,7 @@ function App() {
     }, [number, clickedCards]);
 
     return (
-        <div className='appContainer'>
+        <div className='appContainer' style={{backgroundImage: `url('wallpaper.jpg')`}}>
             {formCheck && <Setup onPlay={startGame} check={replayCheck}></Setup>}
             <div className='cardContainer'>
             <Scoreboard current={currentScore} best={bestScore} />
