@@ -46,3 +46,20 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+.appContainer {
+	background-image: url('wallpaper.jpg');
+	background-size: cover;
+    background-position: center;
+    min-height: 100vh; 
+	padding-top: 20px;
+	padding-bottom: 50px;
+}
+
+.cardContainer {
+	width: 100%;
+	display: grid;
+	justify-content: center;
+	grid-template-columns: repeat(5, 200px);
+	gap: 20px;
+}

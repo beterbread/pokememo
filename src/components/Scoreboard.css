@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+.scoreboard {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+	grid-column: 1 / -1;
+    font-family: "VT323", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 76px;
+}
+
+.scoreboard h1 {
+    text-align: center;
+}

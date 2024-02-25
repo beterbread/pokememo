@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+.setupForm {
+    background-image: url('wallpaper.jpg');
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; 
+}
+
+.setupForm h1 {
+    font-family: "VT323", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 96px;
+    color: white;
+    -webkit-text-stroke-width: 2.3px;
+    -webkit-text-stroke-color: black;
+}
+
+.setupForm input, .setupForm button {
+    border: none;
+    box-shadow:   -3px 0 0 0 black,
+                 3px 0 0 0 black,
+                 0 -3px 0 0 black,
+                 0 3px 0 0 black;
+}
+
+.setupForm input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 32px;
+    width: 50px;
+    padding: 10px 20px;
+}
+
+.setupForm input:focus {
+    outline: none;
+}
+
+.setupForm button {
+    background-color: white;
+    font-size: 36px;
+    padding: 10px 20px;
+    transition: transform 0.2s ease; 
+}  
+
+.setupForm button:hover {
+    cursor: pointer;
+    transform: translateY(-3px);
+}
