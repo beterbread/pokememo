@@ -40,7 +40,6 @@ function App() {
         setLoading(true);
         const arr = [];
         const allIds = Array.from(Array(1025).keys(), i => i + 1);
-        console.log(allIds);
         shuffleArray(allIds); 
         for (let i = 0; i < count; i++) {
             const randomIndex = allIds[i];
