@@ -18,7 +18,7 @@ function App() {
     const [loading, setLoading] = useState(false);
 
     const startGame = (num) => {
-        if (num >= 1 && num <= 1024) {
+        if (num >= 1 && num <= 1025) {
             setNumber(num);
             setFormCheck(false);
         }
@@ -29,25 +29,28 @@ function App() {
         setClickedCards(prevClickedCards => [...prevClickedCards, pokemon]);
     }
 
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
     async function makeCards(count) {
         setLoading(true);
         const arr = [];
-        const selectedPokemon = new Set();
-        while (arr.length < count) {
-            const randomIndex = Math.floor(Math.random() * 1024);
-            if (!selectedPokemon.has(randomIndex)) {
-                try {
-                    const randomPokemon = await Pokemon(randomIndex);
-                    selectedPokemon.add(randomIndex);
-                    arr.push(<Card key={randomIndex} pokemon={randomPokemon.pokemon} sprite={randomPokemon.sprite} updateList={updateList} />);
-                } catch (error) {
-                    console.error("Error fetching Pokémon:", error);
-                }
-            }
+        const allIds = Array.from(Array(1025).keys(), i => i + 1);
+        console.log(allIds);
+        shuffleArray(allIds); 
+        for (let i = 0; i < count; i++) {
+            const randomIndex = allIds[i];
+            const randomPokemon = await Pokemon(randomIndex);
+            arr.push(<Card key={randomIndex} pokemon={randomPokemon.pokemon} sprite={randomPokemon.sprite} updateList={updateList} />);
         }
         setLoading(false);
         return arr;
     }
+
 
     async function initializeGame() {
         const cards = await makeCards(number);
@@ -70,10 +73,7 @@ function App() {
         }
         else {
             const shuffledCards = [...currentCards];
-            for (let i = shuffledCards.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-                [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
-            }
+            shuffleArray(shuffledCards);
             setCurrentCards(shuffledCards);
         }
     }
@@ -100,7 +100,11 @@ function App() {
         <div className='appContainer' style={{backgroundImage: `url('wallpaper.jpg')`}}>
             {formCheck && <Setup onPlay={startGame} check={replayCheck}></Setup>}
             <div className='cardContainer'>
-                {loading ? <img className='pokeball' src={'pokeball.png'}></img> : (
+                {loading ? 
+                <div className='loadingContainer'>
+                    <img className='pokeball' src={'pokeball.png'}></img> 
+                    <p>Loading</p>
+                </div> : (
                     <>
                         {currentCards.length > 0 && <Scoreboard current={currentScore} best={bestScore} />}
                         {currentCards}
