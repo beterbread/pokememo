@@ -17,10 +17,12 @@ export default function Setup({ onPlay, check }) {
                 onChange={(event) => setNumCards(parseInt(event.target.value))}
             ></input>
             <button onClick={() => onPlay(numCards)}>Play</button> 
-        </div>
-        <div className='credit'>
-            <h1>Made by beterbread</h1>
-            <iframe src="https://giphy.com/embed/CBvjuhJncUt6U"allowFullScreen></iframe>
+            <div className='credit'>
+                <h2 className='creditText'>Made by beterbread</h2>
+                <a target='_blank' href='https://github.com/beterbread'>
+                    <iframe src="https://giphy.com/embed/CBvjuhJncUt6U"></iframe>
+                </a>
+            </div>
         </div>
         </>
     );

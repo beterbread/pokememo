@@ -59,15 +59,11 @@
 }
 
 .credit {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
     display: flex;
     align-items: center;
 }
 
-.credit h1 {
+.creditText {
     font-family: "VT323", monospace;
     font-weight: 400;
     font-style: normal;
@@ -77,4 +73,6 @@
 .credit iframe {
     width: 60px;
     height: auto;
+    pointer-events: none;
 }
+
